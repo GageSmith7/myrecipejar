@@ -83,14 +83,14 @@ const Auth = () => {
             fontSize: '1.5rem',
             fontWeight: '600'
           }}>
-            Recipe App
+            MyRecipeJar
           </h2>
           <p style={{
             color: '#666',
             margin: '0',
             fontSize: '0.9rem'
           }}>
-            Save and share your favorite recipes
+            Your Personal Recipe Collection
           </p>
         </div>
 
