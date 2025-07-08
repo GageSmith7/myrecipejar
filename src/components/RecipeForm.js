@@ -8,6 +8,7 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
   const [instructions, setInstructions] = useState('');
   const [category, setCategory] = useState('dinner');
   const [visibility, setVisibility] = useState('private');
+  const [servingSize, setServingSize] = useState('1');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -28,7 +29,8 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
     { value: 'lunch', label: 'Lunch', emoji: '🥙' },
     { value: 'dinner', label: 'Dinner', emoji: '🍽️' },
     { value: 'snack', label: 'Snack', emoji: '🍿' },
-    { value: 'dessert', label: 'Dessert', emoji: '🍰' }
+    { value: 'dessert', label: 'Dessert', emoji: '🍰' },
+    { value: 'cocktail', label: 'Cocktail', emoji: '🍸'}
   ];
 
   // Populate form when editing
@@ -39,6 +41,7 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
       setInstructions(recipe.instructions || '');
       setCategory(recipe.category || 'dinner');
       setVisibility(recipe.visibility || 'private');
+      setServingSize(recipe.servingSize || '1');
     }
   }, [recipe]);
 
@@ -147,6 +150,7 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
           instructions: instructions.trim(),
           category: category,
           visibility: visibility,
+          servingSize: servingSize,
           updatedAt: serverTimestamp()
         };
 
@@ -160,6 +164,7 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
           instructions: instructions.trim(),
           category: category,
           visibility: visibility,
+          servingSize: servingSize,
           createdBy: user.uid,
           createdAt: serverTimestamp()
         };
@@ -174,6 +179,7 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
       setInstructions('');
       setCategory('dinner');
       setVisibility('private');
+      setServingSize('1');
       
       if (onSave) onSave();
       
@@ -476,6 +482,8 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
                   </div>
                 </button>
               </div>
+
+              
               
               {/* Additional Info */}
               <div style={{
@@ -596,6 +604,237 @@ const RecipeForm = ({ user, recipe, onCancel, onSave }) => {
               <span style={{ color: '#94a3b8', fontSize: '0.85rem', marginLeft: 'auto' }}>
                 {instructions.length}/2000 characters
               </span>
+            </div>
+          </div>
+
+          {/* Serving Size Field */}
+          <div style={{ marginBottom: '32px' }}>
+            <label style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginBottom: '12px',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              color: '#1a202c'
+            }}>
+              <span>👥</span>
+              Serving Size
+            </label>
+            
+            <div style={{
+              background: '#f8fafc',
+              borderRadius: '12px',
+              padding: '20px',
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '16px'
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px'
+                }}>
+                  <span style={{ fontSize: '20px' }}>🍽️</span>
+                  <div>
+                    <div style={{
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: '#1a202c',
+                      marginBottom: '2px'
+                    }}>
+                      Number of Servings
+                    </div>
+                    <div style={{
+                      fontSize: '0.85rem',
+                      color: '#64748b'
+                    }}>
+                      How many people will this recipe serve?
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Serving Size Input with Controls */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: 'white',
+                  borderRadius: '10px',
+                  border: '2px solid #e2e8f0',
+                  padding: '4px'
+                }}>
+                  {/* Decrease Button */}
+                  <button
+                    type="button"
+                    onClick={() => setServingSize(Math.max(1, parseInt(servingSize) - 1).toString())}
+                    disabled={parseInt(servingSize) <= 1}
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      background: parseInt(servingSize) <= 1 
+                        ? 'linear-gradient(135deg, #f3f4f6, #e5e7eb)' 
+                        : 'linear-gradient(135deg, #667eea, #764ba2)',
+                      color: parseInt(servingSize) <= 1 ? '#9ca3af' : 'white',
+                      cursor: parseInt(servingSize) <= 1 ? 'not-allowed' : 'pointer',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (parseInt(servingSize) > 1) {
+                        e.target.style.transform = 'scale(1.05)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (parseInt(servingSize) > 1) {
+                        e.target.style.transform = 'scale(1)';
+                      }
+                    }}
+                  >
+                    −
+                  </button>
+                  
+                  {/* Serving Size Input */}
+                  <input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={servingSize}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === '' || (parseInt(value) >= 1 && parseInt(value) <= 50)) {
+                        setServingSize(value);
+                      }
+                    }}
+                    onBlur={(e) => {
+                      const value = parseInt(e.target.value);
+                      if (isNaN(value) || value < 1) {
+                        setServingSize('1');
+                      } else if (value > 50) {
+                        setServingSize('50');
+                      }
+                    }}
+                    style={{
+                      width: '60px',
+                      height: '36px',
+                      textAlign: 'center',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: '#1a202c',
+                      border: 'none',
+                      background: 'transparent',
+                      outline: 'none'
+                    }}
+                  />
+                  
+                  {/* Increase Button */}
+                  <button
+                    type="button"
+                    onClick={() => setServingSize(Math.min(50, parseInt(servingSize) + 1).toString())}
+                    disabled={parseInt(servingSize) >= 50}
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      background: parseInt(servingSize) >= 50 
+                        ? 'linear-gradient(135deg, #f3f4f6, #e5e7eb)' 
+                        : 'linear-gradient(135deg, #667eea, #764ba2)',
+                      color: parseInt(servingSize) >= 50 ? '#9ca3af' : 'white',
+                      cursor: parseInt(servingSize) >= 50 ? 'not-allowed' : 'pointer',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (parseInt(servingSize) < 50) {
+                        e.target.style.transform = 'scale(1.05)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (parseInt(servingSize) < 50) {
+                        e.target.style.transform = 'scale(1)';
+                      }
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              
+              {/* Quick Select Buttons */}
+              <div style={{
+                display: 'flex',
+                gap: '8px',
+                flexWrap: 'wrap'
+              }}>
+                {[1, 2, 4, 6, 8, 12].map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => setServingSize(size.toString())}
+                    style={{
+                      padding: '8px 16px',
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      background: parseInt(servingSize) === size 
+                        ? 'linear-gradient(135deg, #667eea, #764ba2)' 
+                        : 'white',
+                      color: parseInt(servingSize) === size ? 'white' : '#64748b',
+                      border: parseInt(servingSize) === size 
+                        ? '2px solid #667eea' 
+                        : '2px solid #e2e8f0',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (parseInt(servingSize) !== size) {
+                        e.target.style.background = '#f8fafc';
+                        e.target.style.borderColor = '#cbd5e1';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (parseInt(servingSize) !== size) {
+                        e.target.style.background = 'white';
+                        e.target.style.borderColor = '#e2e8f0';
+                      }
+                    }}
+                  >
+                    {size} {size === 1 ? 'person' : 'people'}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Additional Info */}
+              <div style={{
+                background: 'linear-gradient(135deg, #667eea10, #764ba210)',
+                borderRadius: '8px',
+                padding: '12px',
+                border: '1px solid #667eea30',
+                marginTop: '16px'
+              }}>
+                <div style={{
+                  fontSize: '0.85rem',
+                  color: '#64748b',
+                  lineHeight: '1.4'
+                }}>
+                  <strong style={{ color: '#667eea' }}>Pro tip:</strong> Consider appetites and meal context. Main dishes typically serve fewer than appetizers or sides.
+                </div>
+              </div>
             </div>
           </div>
 

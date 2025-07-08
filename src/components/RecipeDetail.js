@@ -261,6 +261,20 @@ const RecipeDetail = ({ recipe, onBack, onEdit, user, readOnly }) => {
                 }) || 'Recently'}
               </div>
             </div>
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.2)',
+              padding: '12px 20px',
+              borderRadius: '12px',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.3)'
+            }}>
+              <div style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.85rem', marginBottom: '4px' }}>
+                Serving Size
+              </div>
+              <div style={{ color: 'white', fontSize: '1rem', fontWeight: '600' }}>
+                {recipe.servingSize || '1'}
+              </div>
+            </div>
             
             <div style={{
               background: 'rgba(255, 255, 255, 0.2)',

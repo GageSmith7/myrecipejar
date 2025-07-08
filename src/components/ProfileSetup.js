@@ -28,7 +28,8 @@ const sampleRecipes = [
 8. Toss everything together for 1 minute
 9. Serve immediately with fresh basil and parmesan
 
-🍝 Save some pasta water - add a splash if the sauce seems too thick!`
+🍝 Save some pasta water - add a splash if the sauce seems too thick!`,
+      servingSize: '1'
   },
   {
     title: "Classic Chocolate Chip Cookies",
@@ -55,7 +56,8 @@ const sampleRecipes = [
 8. Bake for 9-11 minutes until golden brown around the edges
 9. Let cool on baking sheet for 5 minutes before transferring to wire rack
 
-🍪 For chewier cookies, slightly underbake them. For crispier cookies, bake a minute longer!`
+🍪 For chewier cookies, slightly underbake them. For crispier cookies, bake a minute longer!`,
+      servingSize: '1'
   },
   {
     title: "Movie Night Popcorn",
@@ -77,7 +79,8 @@ const sampleRecipes = [
 7. Drizzle with melted butter and sprinkle with salt
 8. Add any optional seasonings and toss well
 
-🍿 The key is not lifting the lid until the popping stops!`
+🍿 The key is not lifting the lid until the popping stops!`,
+      servingSize: '1'
   }
 ];
 

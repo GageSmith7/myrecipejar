@@ -604,6 +604,7 @@ const RecipeList = ({ user, onSelectRecipe }) => {
                   <option value="dinner">🍽️ Dinner</option>
                   <option value="snack">🍿 Snack</option>
                   <option value="dessert">🍰 Dessert</option>
+                  <option value="cocktail">🍸 Cocktail</option>
                 </select>
               </div>
 
@@ -872,7 +873,8 @@ function getCategoryLabel(category) {
     lunch: 'Lunch',
     dinner: 'Dinner', 
     snack: 'Snack',
-    dessert: 'Dessert'
+    dessert: 'Dessert',
+    cocktail: 'Cocktail'
   };
   return labelMap[category] || 'Dinner';
 }
