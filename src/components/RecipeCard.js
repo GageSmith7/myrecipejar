@@ -59,7 +59,7 @@ export default function RecipeCard({ recipe, onSelect }) {
             {/* Recipe emoji/icon - positioned better */}
             <div style={{
               position: 'absolute',
-              bottom: '-12px', // Adjusted for smaller header
+              bottom: '3px', // Adjusted for smaller header
               right: '16px',
               width: '40px', // Slightly smaller
               height: '40px',
