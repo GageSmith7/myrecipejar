@@ -27,9 +27,9 @@ export default function RecipeCard({ recipe, onSelect }) {
             e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
           }}
         >
-          {/* Top decorative section */}
+          {/* Compact top decorative section */}
           <div style={{
-            height: '80px',
+            height: '60px', // Reduced from 80px
             background: `linear-gradient(135deg, 
               ${getRandomGradient(recipe.title)} 0%, 
               ${getRandomGradient(recipe.title, true)} 100%)`,
@@ -39,163 +39,159 @@ export default function RecipeCard({ recipe, onSelect }) {
             {/* Background decoration */}
             <div style={{
               position: 'absolute',
-              top: '-20px',
-              right: '-20px',
-              width: '60px',
-              height: '60px',
+              top: '-15px',
+              right: '-15px',
+              width: '40px',
+              height: '40px',
               background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '50%'
             }} />
             <div style={{
               position: 'absolute',
-              bottom: '-15px',
-              left: '-15px',
-              width: '40px',
-              height: '40px',
+              bottom: '-10px',
+              left: '-10px',
+              width: '30px',
+              height: '30px',
               background: 'rgba(255, 255, 255, 0.15)',
               borderRadius: '50%'
             }} />
             
-            {/* Recipe emoji/icon */}
+            {/* Recipe emoji/icon - positioned better */}
             <div style={{
               position: 'absolute',
-              bottom: '-15px',
-              right: '20px',
-              width: '50px',
-              height: '50px',
+              bottom: '-12px', // Adjusted for smaller header
+              right: '16px',
+              width: '40px', // Slightly smaller
+              height: '40px',
               background: 'white',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '24px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+              fontSize: '20px', // Slightly smaller emoji
+              boxShadow: '0 3px 8px rgba(0, 0, 0, 0.15)'
             }}>
               {getRecipeEmoji(recipe.title)}
             </div>
           </div>
           
-          {/* Content section */}
+          {/* Content section - more space for content */}
           <div style={{ 
-            padding: '25px 20px 20px 20px',
+            padding: '20px 18px 16px 18px', // Adjusted padding
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between'
           }}>
-            {/* Recipe Title and Category */}
+            {/* Recipe Title */}
             <div>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#1a202c',
+                fontSize: '1.25rem', // Slightly smaller but still prominent
+                fontWeight: '700',
+                lineHeight: '1.3',
+                overflow: 'hidden',
+                display: '-webkit-box',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                minHeight: '2.4rem',
+                wordBreak: 'break-word'
+              }}>
+                {recipe.title}
+              </h3>
+              
+              {/* Compact Category and Privacy Badges */}
               <div style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: '12px',
-                gap: '12px'
+                gap: '6px',
+                alignItems: 'center',
+                marginBottom: '10px',
+                flexWrap: 'wrap'
               }}>
-                <h3 style={{ 
-                  margin: 0, 
-                  color: '#1a202c',
-                  fontSize: '1.4rem',
-                  fontWeight: '700',
-                  lineHeight: '1.3',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  flex: 1
-                }}>
-                  {recipe.title}
-                </h3>
-                
-                {/* Category and Privacy Badges */}
+                {/* Privacy Badge - Smaller */}
                 <div style={{
+                  padding: '3px 8px', // Reduced padding
+                  background: recipe.visibility === 'public' 
+                    ? 'linear-gradient(135deg, #10b98118, #059f3e18)'
+                    : 'linear-gradient(135deg, #64748b18, #47556918)',
+                  borderRadius: '12px', // Smaller border radius
+                  fontSize: '0.7rem', // Smaller font
+                  fontWeight: '600',
+                  color: recipe.visibility === 'public' ? '#059669' : '#64748b',
+                  whiteSpace: 'nowrap',
                   display: 'flex',
-                  gap: '6px',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  gap: '3px',
+                  border: `1px solid ${recipe.visibility === 'public' ? '#10b98125' : '#64748b25'}`
                 }}>
-                  {/* Privacy Badge */}
-                  <div style={{
-                    padding: '4px 8px',
-                    background: recipe.visibility === 'public' 
-                      ? 'linear-gradient(135deg, #10b98120, #059f3e20)'
-                      : 'linear-gradient(135deg, #64748b20, #47556920)',
-                    borderRadius: '20px',
-                    fontSize: '0.7rem',
-                    fontWeight: '600',
-                    color: recipe.visibility === 'public' ? '#059669' : '#64748b',
-                    whiteSpace: 'nowrap',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '3px',
-                    border: `1px solid ${recipe.visibility === 'public' ? '#10b98130' : '#64748b30'}`
-                  }}>
-                    <span style={{ fontSize: '8px' }}>
-                      {recipe.visibility === 'public' ? '🌍' : '🔒'}
-                    </span>
-                    {recipe.visibility === 'public' ? 'Public' : 'Private'}
-                  </div>
-                  
-                  {/* Category Badge */}
-                  <div style={{
-                    padding: '4px 10px',
-                    background: `linear-gradient(135deg, ${getRandomGradient(recipe.title)}20, ${getRandomGradient(recipe.title, true)}20)`,
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    color: getRandomGradient(recipe.title),
-                    whiteSpace: 'nowrap',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    border: `1px solid ${getRandomGradient(recipe.title)}30`
-                  }}>
-                    <span style={{ fontSize: '10px' }}>{getCategoryEmoji(recipe.category)}</span>
-                    {getCategoryLabel(recipe.category)}
-                  </div>
+                  <span style={{ fontSize: '8px' }}>
+                    {recipe.visibility === 'public' ? '🌍' : '🔒'}
+                  </span>
+                  {recipe.visibility === 'public' ? 'Public' : 'Private'}
+                </div>
+                
+                {/* Category Badge - Smaller */}
+                <div style={{
+                  padding: '3px 10px', // Reduced padding
+                  background: `linear-gradient(135deg, ${getRandomGradient(recipe.title)}18, ${getRandomGradient(recipe.title, true)}18)`,
+                  borderRadius: '12px', // Smaller border radius
+                  fontSize: '0.7rem', // Smaller font
+                  fontWeight: '600',
+                  color: getRandomGradient(recipe.title),
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '3px',
+                  border: `1px solid ${getRandomGradient(recipe.title)}25`
+                }}>
+                  <span style={{ fontSize: '8px' }}>{getCategoryEmoji(recipe.category)}</span>
+                  {getCategoryLabel(recipe.category)}
                 </div>
               </div>
               
-              {/* Instructions Preview */}
+              {/* Instructions Preview - Compact */}
               {recipe.instructions && (
                 <p style={{ 
-                  margin: '0 0 16px 0', 
+                  margin: '0 0 14px 0', 
                   color: '#64748b', 
-                  fontSize: '0.9rem',
-                  lineHeight: '1.5',
+                  fontSize: '0.85rem', // Slightly smaller
+                  lineHeight: '1.4',
                   overflow: 'hidden',
                   display: '-webkit-box',
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
-                  height: '2.7rem'
+                  height: '2.4rem'
                 }}>
-                  {recipe.instructions.length > 100 
-                    ? `${recipe.instructions.substring(0, 100)}...` 
+                  {recipe.instructions.length > 90 
+                    ? `${recipe.instructions.substring(0, 90)}...` 
                     : recipe.instructions
                   }
                 </p>
               )}
             </div>
             
-            {/* Bottom info section */}
+            {/* Bottom info section - Compact */}
             <div>
-              {/* Recipe Stats */}
+              {/* Recipe Stats - More compact */}
               <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center',
-                marginBottom: '12px'
+                marginBottom: '10px'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  background: 'linear-gradient(135deg, #667eea15, #764ba215)',
-                  padding: '6px 12px',
-                  borderRadius: '8px'
+                  gap: '5px',
+                  background: 'linear-gradient(135deg, #667eea12, #764ba212)',
+                  padding: '5px 10px', // Smaller padding
+                  borderRadius: '6px'
                 }}>
-                  <span style={{ fontSize: '14px' }}>🥘</span>
+                  <span style={{ fontSize: '12px' }}>🥘</span>
                   <span style={{ 
                     color: '#667eea', 
-                    fontSize: '0.85rem',
+                    fontSize: '0.8rem', // Smaller
                     fontWeight: '600'
                   }}>
                     {recipe.ingredients?.length || 0} ingredients
@@ -205,11 +201,11 @@ export default function RecipeCard({ recipe, onSelect }) {
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '4px'
                 }}>
-                  <span style={{ fontSize: '12px', opacity: 0.6 }}>📅</span>
+                  <span style={{ fontSize: '10px', opacity: 0.6 }}>📅</span>
                   <span style={{ 
-                    fontSize: '0.75rem', 
+                    fontSize: '0.7rem', // Smaller
                     color: '#94a3b8',
                     fontWeight: '500'
                   }}>
@@ -221,26 +217,26 @@ export default function RecipeCard({ recipe, onSelect }) {
                 </div>
               </div>
               
-              {/* Click hint with arrow */}
+              {/* Click hint - Compact */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px',
-                padding: '8px',
-                borderRadius: '8px',
+                gap: '5px',
+                padding: '6px', // Smaller padding
+                borderRadius: '6px',
                 background: 'rgba(102, 126, 234, 0.05)',
                 transition: 'all 0.2s ease'
               }}>
                 <span style={{
-                  fontSize: '0.8rem',
+                  fontSize: '0.75rem', // Smaller
                   color: '#667eea',
                   fontWeight: '500'
                 }}>
                   View Recipe
                 </span>
                 <span style={{
-                  fontSize: '12px',
+                  fontSize: '10px',
                   color: '#667eea'
                 }}>
                   →
