@@ -147,60 +147,64 @@ function App() {
           position: 'relative',
           zIndex: 10,
           padding: '25px 30px',
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
           maxWidth: '1200px', 
-          margin: '0 auto' 
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              borderRadius: '15px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
-            }}>
-              🍳
-            </div>
-            <div>
-              <h1 style={{ 
-                margin: 0, 
-                color: 'white',
-                fontSize: '2.2rem',
-                fontWeight: '700',
-                textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          margin: '0 auto'
+        }} className="header-content">
+          {/* Top row with logo and welcome message */}
+          <div style={{
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            marginBottom: '0'
+          }} className="header-top-row">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{
+                width: '50px',
+                height: '50px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '15px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
               }}>
-                MyRecipeJar
-              </h1>
-              <p style={{
-                margin: 0,
-                color: 'rgba(255, 255, 255, 0.8)',
-                fontSize: '0.9rem',
-                fontWeight: '400'
-              }}>
-                Your personal recipe collection
-              </p>
+                🍳
+              </div>
+              <div>
+                <h1 style={{ 
+                  margin: 0, 
+                  color: 'white',
+                  fontSize: '2.2rem',
+                  fontWeight: '700',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }} className="app-title">
+                  MyRecipeJar
+                </h1>
+                <p style={{
+                  margin: 0,
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  fontSize: '0.9rem',
+                  fontWeight: '400'
+                }} className="app-subtitle">
+                  Your personal recipe collection
+                </p>
+              </div>
             </div>
-          </div>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            
+            {/* Welcome message - hidden on mobile */}
             <div style={{
               background: 'rgba(255, 255, 255, 0.15)',
               borderRadius: '12px',
               padding: '12px 16px',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
-            }}>
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }} className="welcome-message">
               <div style={{ 
                 color: 'rgba(255, 255, 255, 0.9)',
                 fontSize: '0.85rem',
-                marginBottom: '2px'
+                marginBottom: '2px',
               }}>
                 Welcome back
               </div>
@@ -212,7 +216,16 @@ function App() {
                 {userProfile?.displayName || user.email.split('@')[0]}
               </div>
             </div>
+          </div>
 
+          {/* Action buttons row */}
+          <div style={{
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '15px',
+            justifyContent: 'flex-start'
+          }} className="header-buttons">
             <button
               onClick={() => setColab(true)}
               style={{
@@ -225,8 +238,10 @@ function App() {
                 borderRadius: '10px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                minWidth: '80px',
               }}
+              className="header-button"
               onMouseEnter={(e) => {
                 e.target.style.background = 'rgba(255, 255, 255, 0.25)';
                 e.target.style.transform = 'translateY(-1px)';
@@ -251,8 +266,10 @@ function App() {
                 borderRadius: '10px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                minWidth: '80px',
               }}
+              className="header-button"
               onMouseEnter={(e) => {
                 e.target.style.background = 'rgba(255, 255, 255, 0.25)';
                 e.target.style.transform = 'translateY(-1px)';
